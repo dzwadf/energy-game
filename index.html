@@ -462,6 +462,50 @@ button.xbtn::before{content:"✕ ";font-weight:900;color:#D32F2F}
 .cgauge.mini{margin:0 0 8px;padding:6px 10px;gap:6px;font-size:.8rem}
 .cgauge.mini .seg{min-width:120px}.cgauge.mini .seg i{height:12px}
 
+/* ===== 내 자원 크게 보기 ===== */
+.wallet{margin:0 0 10px;padding:8px;border-radius:12px;background:var(--card,#fff);box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}
+.wl-hd{display:flex;justify-content:space-between;align-items:baseline;font-size:.8rem;color:var(--muted);margin:0 2px 6px}
+.wl-hd b{color:inherit;font-size:.85rem}
+.wl-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(74px,1fr));gap:5px}
+.wl{display:grid;grid-template-columns:auto 1fr;grid-template-areas:"i b" "nm nm" "em em" "pw pw";align-items:center;justify-items:center;gap:0 4px;padding:5px 4px;border-radius:10px;background:rgba(0,0,0,.035);text-align:center;line-height:1.15}
+.wl.zero{opacity:.55}
+.wl i{grid-area:i;width:26px;height:26px;border-radius:50%;background:var(--c);color:#fff;display:grid;place-items:center;font-style:normal;font-weight:800;font-size:.85rem;box-shadow:inset 0 -3px 0 rgba(0,0,0,.25)}
+.wl .nm{grid-area:nm;font-size:.7rem;color:var(--muted)}
+.wl b{grid-area:b;font-size:1.4rem;font-weight:900}
+.wl em{grid-area:em;font-style:normal;font-size:.7rem;font-weight:800;color:#2F7D46}
+.wl em.no{color:var(--muted);font-weight:600}
+.wl .pw{grid-area:pw;font-size:.66rem;color:#2F7D46;font-weight:700}
+@media (max-width:520px){.wl-row{grid-template-columns:repeat(6,minmax(0,1fr));gap:3px}.wl{grid-template-columns:1fr;grid-template-areas:"i" "b" "em";padding:4px 1px}.wl .nm,.wl .pw{display:none}.wl b{font-size:1.15rem}.wl i{width:22px;height:22px;font-size:.72rem}.wl em{font-size:.62rem}}
+.mcard .needtag{position:absolute;right:6px;bottom:6px;line-height:1.3;z-index:2;font-size:.7rem;font-weight:800;padding:2px 7px;border-radius:999px;background:rgba(255,255,255,.92);color:#9E2B1C;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+.mcard .needtag.ok{background:#F2B33D;color:#3A2A00}
+
+/* ===== 정책 목표 카드 ===== */
+.goals{margin:0 0 10px}
+.goals h3{margin:0 0 6px;font-size:1rem}
+.goals h3 small{font-weight:600;color:var(--muted);font-size:.78rem}
+.grow{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px}
+.gl{position:relative;border-radius:12px;padding:8px 10px;background:linear-gradient(160deg,#FFF8E6,#F6E7C1);border:2px solid #D9A93A;color:#3A2A00;display:grid;gap:3px}
+.gl .gt{display:flex;align-items:center;gap:6px;font-weight:900}
+.gl .gt .ic{font-size:1.4rem;line-height:1}
+.gl .gt .pt{margin-left:auto;background:#B8860B;color:#fff;border-radius:999px;padding:1px 8px;font-size:.8rem}
+.gl .gx{font-size:.78rem}
+.gl .gp{display:flex;flex-wrap:wrap;gap:4px}
+.gl .gp span{font-size:.7rem;font-weight:800;padding:1px 7px;border-radius:999px;background:rgba(0,0,0,.08)}
+.gl .gp span.ok{background:#2F7D46;color:#fff}
+.gl.own{background:linear-gradient(160deg,#E9E4D8,#D6CFBF);border-color:#9A8F78;opacity:.85}
+.gl .who{font-size:.75rem;font-weight:900;color:#7A5200}
+.gl.near{box-shadow:0 0 0 3px rgba(242,179,61,.6)}
+.wl-goal{margin:6px 2px 0;font-size:.78rem;font-weight:700;color:#7A5200}
+.fxgoal{background:linear-gradient(160deg,#5A3E00,#B8860B);border:3px solid #FFD54F;padding:20px 26px}
+.fxgoal .big{font-size:3rem}
+
+.fx.lightsoff{background:rgba(0,0,0,0);animation:loff 2.4s .3s steps(4) forwards}
+@keyframes loff{to{background:rgba(0,0,20,.35)}}
+.fx.co2up i{position:absolute;bottom:-60px;width:52px;height:52px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#C9C9C9,#7A7A7A 60%,#444);color:#fff;font:900 .8rem/52px sans-serif;text-align:center;font-style:normal;animation:co2rise 2.2s var(--dl) ease-in forwards}
+@keyframes co2rise{0%{transform:translateY(0) scale(1);opacity:1}70%{opacity:1}100%{transform:translateY(-75vh) scale(.3);opacity:0}}
+.fx.co2up b{position:absolute;left:50%;top:14%;transform:translateX(-50%);font-size:3.2rem;font-weight:900;color:#7CD957;text-shadow:0 0 18px rgba(0,0,0,.6);animation:fxin .4s 1.6s both}
+@media (prefers-reduced-motion:reduce){.fx.co2up i{display:none}}
+
 .tabs{display:flex;gap:6px;margin:0 0 12px}
 .tabs button{flex:1}
 .tabs button[aria-selected="true"]{background:var(--accent,#2F7D46);color:#fff;border-color:transparent}
@@ -673,11 +717,11 @@ const KIND={re:"재생에너지 발전소",fo:"화력 발전소",nu:"원자력 �
 const CARD_DATA=[
  [1,"태양광","re",6,{land:2,money:1},2,0,"land"],
  [1,"풍력","re",5,{land:2,people:1,money:1},2,1,"money"],
- [1,"석탄화력","fo",4,{fossil:2,money:1},3,-1,"fossil"],
+ [1,"석탄화력","fo",4,{fossil:2,money:1},3,0,"fossil"],
  [1,"가정","bd",7,{money:1,people:1,land:1},-1,0,"people"],
  [1,"스마트팜","bd",6,{land:2,people:1,money:1},-1,0,"money"],
  [2,"수력","re",4,{land:3,people:2,money:1},3,2,"land"],
- [2,"LNG화력","fo",3,{fossil:3,money:2},3,1,"fossil"],
+ [2,"LNG화력","fo",3,{fossil:3,money:2},4,1,"fossil"],
  [2,"SMR","nu",3,{uranium:1,money:2,people:2},3,1,"money"],
  [2,"교통","bd",4,{money:2,people:2,fossil:2},-3,2,"people"],
  [2,"기업","bd",5,{money:3,people:2,land:1},-3,3,null],
@@ -693,20 +737,23 @@ const EV_DATA=[
  [1,"gale","good","강풍",1,"풍력·해상풍력 1장마다 전력 +1"],
  [1,"subsidy","good","재생에너지 보조금",1,"이번 라운드에 재생에너지 발전소를 살 때 토큰 1개 할인"],
  [1,"safety","ban","설비 안전 점검",1,"이번 라운드에 석탄화력·LNG화력을 살 수 없다"],
- [1,"cloudy","bad","흐림",2,"태양광·태양광 단지 전력 0, 모두 소비 +1 (조명)"],
+ [1,"cloudy","bad","흐림",1,"태양광·태양광 단지 전력 0, 모두 소비 +1 (조명)"],
  [1,"nowind","bad","무풍",2,"풍력·해상풍력 전력 0"],
  [1,"monsoon","bad","장마",1,"태양광·태양광 단지 전력 0, 수력 1장마다 전력 +1"],
  [1,"drought","bad","가뭄",1,"수력 전력 0, 원자력·SMR 전력 −1 (냉각수)"],
- [1,"heat","dem","폭염",2,"모두 소비 +3 (에어컨)"],
+ [1,"heat","dem","폭염",1,"모두 소비 +2 (에어컨)"],
  [1,"cold","dem","한파",1,"모두 소비 +2 (난방)"],
  [1,"ctax","geo","탄소세",1,"석탄화력 1장마다 토큰 1개 반납"],
+ [1,"save","good","에너지 절약 캠페인",1,"모두 소비 −2 (절전)"],
+ [1,"ccs","good","탄소 포집 기술",1,"탄소 게이지 −3"],
  [1,"nukecheck","ban","원전 정기 점검",1,"원자력·SMR 전력 0, 이번 라운드에 원자력·SMR을 살 수 없다"],
  [2,"sunny","good","맑은 날",1,"태양광·태양광 단지 1장마다 전력 +1"],
  [2,"tech","good","기술 혁신",1,"이번 라운드에 3단계 카드를 살 때 토큰 1개 할인"],
+ [2,"dr","good","수요 반응(DR) 참여",1,"모두 소비 −2, 스마트그리드가 있으면 −3"],
  [2,"typhoon","bad","슈퍼 태풍",2,"태양광·풍력 계열 전력 0, 모두 소비 +1 (복구)"],
  [2,"heatwind","bad","폭염 속 무풍",1,"풍력·해상풍력 전력 0, 모두 소비 +2"],
  [2,"longdrought","bad","장기 가뭄",1,"수력 전력 0, 원자력·SMR 전력 −2 (냉각수 부족)"],
- [2,"xheat","dem","극한 폭염",2,"모두 소비 +4"],
+ [2,"xheat","dem","극한 폭염",1,"모두 소비 +4"],
  [2,"cold","dem","한파",1,"모두 소비 +3 (난방)"],
  [2,"gridfail","ban","송전망 고장",2,"스마트그리드가 없으면 전력 −3, 이번 라운드에 AI 데이터센터·공장을 살 수 없다"],
  [2,"strait","geo","해협 봉쇄",1,"석탄화력·LNG화력 전력 0. 화석 토큰 1개를 내면 그 카드 1장은 정상 가동"],
@@ -716,10 +763,10 @@ const EV_DATA=[
 const ROLES=[
  {id:"magnate",name:"자원 재벌",lvl:"쉬움",text:"같은 종류 토큰 2개를 가져올 수 있다 (그 토큰이 4개 이상 남아 있을 때)"},
  {id:"trader",name:"무역상",lvl:"보통",text:"턴에 1번, 다른 사람과 토큰 1개를 강제로 맞바꾼다"},
- {id:"investor",name:"투자자",lvl:"보통",text:"카드를 살 때 덱 맨 위 2장 중에서도 고를 수 있다"},
+ {id:"investor",name:"투자자",lvl:"보통",text:"카드를 살 때 덱 맨 위 1장도 보고 살 수 있다"},
  {id:"forecaster",name:"기상 예보관",lvl:"보통",text:"이벤트를 2장 뒤집고 1장을 고른다. 2라운드에 1번"},
- {id:"techdev",name:"기술 개발자",lvl:"어려움",text:"카드를 살 때 남는 할인 보너스 1개를 원하는 종류로 바꿔 쓸 수 있다. 바꿔 쓸 때마다 전기 칩 1개를 낸다"},
- {id:"activist",name:"환경운동가",lvl:"어려움",text:"다른 사람이 화력을 살 때마다 가운데 더미에서 토큰 1개를 받는다. 본인은 화력 구매 불가"}];
+ {id:"techdev",name:"기술 개발자",lvl:"어려움",text:"2·3단계 카드를 살 때 2라운드에 1번, 남는 할인 보너스 1개를 원하는 종류로 바꿔 쓸 수 있다. 바꿔 쓸 때 전기 칩 1개를 낸다"},
+ {id:"activist",name:"환경운동가",lvl:"어려움",text:"다른 사람이 화력을 사면 가운데 더미에서 토큰 1개를 받는다 (라운드에 1번). 본인은 화력 구매 불가"}];
 const SOLAR=["태양광","태양광 단지"],WIND=["풍력","해상풍력"];
 const HAND=10,GOAL=15,CARBON_MAX=12;let LOSS_CAP=2;const setCap=c=>{LOSS_CAP=c;};
 
@@ -730,7 +777,7 @@ const roleOf=p=>ROLES.find(r=>r.id===p.role);
 function newGame(names,opt={}){
  const n=names.length;
  const S={n,round:0,cur:0,phase:"turn",log:[],acted:false,traded:false,pending:null,flags:{},ev:null,
-  supply:{...SUPPLY[n]},special:{ess:n,sg:n-1},decks:{},market:{},evDecks:{1:[],2:[]},forecastCD:0,winner:null,carbon:0,carbonAdd:0,earlyCrisis:0};
+  supply:{...SUPPLY[n]},special:{ess:n,sg:n-1},decks:{},market:{},evDecks:{1:[],2:[]},forecastCD:0,winner:null,goals:shuffle(GOALS.map(g=>g.id)).slice(0,n+1).map(id=>({id,owner:null})),carbon:0,carbonAdd:0,earlyCrisis:0,carbonMax:({2:10,3:12,4:15})[n]||12};
  let id=0;
  for(const t of [1,2,3]){
   const d=[];for(const c of CARD_DATA.filter(c=>c[0]===t))for(let k=0;k<c[3];k++)d.push({id:id++,tier:t,name:c[1],kind:c[2],cost:c[4],power:c[5],pts:c[6],bonus:c[7]});
@@ -738,8 +785,8 @@ function newGame(names,opt={}){
  for(const e of EV_DATA)for(let k=0;k<e[4];k++)S.evDecks[e[0]].push({half:e[0],id:e[1],cat:e[2],name:e[3],text:e[5]});
  shuffle(S.evDecks[1]);shuffle(S.evDecks[2]);
  const pool=shuffle(ROLES.filter(r=>!(opt.noHard&&r.lvl==="어려움")).map(r=>r.id));
- S.players=names.map((nm,i)=>({name:nm,role:pool[i%pool.length],tokens:{money:0,people:0,fossil:0,land:0,uranium:0},chips:0,cards:[],ess:false,sg:false,essOpen:false,co2:0,wasted:0,blackouts:0}));
- log(S,`새 게임: ${n}명, 목표 ${GOAL}점`);
+ S.players=names.map((nm,i)=>({name:nm,role:pool[i%pool.length],tokens:{money:0,people:0,fossil:0,land:0,uranium:0},chips:0,cards:[],ess:false,sg:false,essOpen:false,co2:0,wasted:0,blackouts:0,goals:[]}));
+ log(S,`새 게임: ${n}명, 목표 ${GOAL}점, 탄소 게이지 ${S.carbonMax}칸`);
  startRound(S);return S;}
 
 function log(S,m){S.log.unshift(m);if(S.log.length>200)S.log.pop();}
@@ -754,7 +801,19 @@ function offLoss(p,deficit){if(deficit<=0)return 0;
  let best=INF;for(let v=deficit;v<=tot;v++)best=Math.min(best,dp[v]);return best;}
 function deficitOf(r){return r.net<0?-r.net-r.useChips:0;}
 function poweredPoints(S,p,run){const r=powerCalc(S,p,run||0);return points(p)-offLoss(p,deficitOf(r));}
-function points(p){let s=p.cards.reduce((a,c)=>a+c.pts,0);if(p.ess)s+=1;if(p.sg)s+=2;if(p.ess&&p.sg)s+=1;return s;}
+const GOALS=[
+ {id:"solar",name:"태양광 도시",icon:"🌞",text:"태양광 계열(태양광·태양광 단지) 4장 + ESS",need:p=>[["태양광 계열",nameN(p,["태양광","태양광 단지"]),4],["ESS",p.ess?1:0,1]]},
+ {id:"wind",name:"바람의 섬",icon:"🌬",text:"풍력 계열(풍력·해상풍력) 3장 + ESS",need:p=>[["풍력 계열",nameN(p,["풍력","해상풍력"]),3],["ESS",p.ess?1:0,1]]},
+ {id:"baseload",name:"무탄소 기저전원",icon:"⚛️",text:"원자력 또는 SMR 1장 + 수력 1장",need:p=>[["원자력·SMR",kindN(p,"nu"),1],["수력",nameN(p,["수력"]),1]]},
+ {id:"smart",name:"스마트시티",icon:"🏙",text:"스마트그리드 + 교통·병원 중 2장",need:p=>[["스마트그리드",p.sg?1:0,1],["교통·병원",nameN(p,["교통","병원"]),2]]},
+ {id:"industry",name:"RE100 산업단지",icon:"🏭",text:"기업·AI 데이터센터·공장 중 2장 + 화력 0장",need:p=>[["기업·AI·공장",nameN(p,["기업","AI 데이터센터","공장"]),2],["화력 0장",kindN(p,"fo")?0:1,1]]},
+ {id:"village",name:"농촌 자립 마을",icon:"🌾",text:"가정 2장 + 스마트팜 3장",need:p=>[["가정",nameN(p,["가정"]),2],["스마트팜",nameN(p,["스마트팜"]),3]]}];
+const GOAL_PTS=3;
+const kindN=(p,k)=>p.cards.filter(c=>c.kind===k).length,nameN=(p,ns)=>p.cards.filter(c=>ns.includes(c.name)).length;
+const goalDef=id=>GOALS.find(g=>g.id===id);
+const goalMet=(p,g)=>g.need(p).every(([,h,n])=>h>=n);
+function checkGoals(S,p){if(!S.goals)return;for(const G of S.goals){if(G.owner!=null)continue;const g=goalDef(G.id);if(g&&goalMet(p,g)){G.owner=S.players.indexOf(p);p.goals=(p.goals||[]).concat(G.id);log(S,`${p.name}: 정책 목표 「${g.name}」 달성! (+${GOAL_PTS}점)`);return;}}}
+function points(p){let s=p.cards.reduce((a,c)=>a+c.pts,0)+(p.goals||[]).length*GOAL_PTS;if(p.ess)s+=1;if(p.sg)s+=2;if(p.ess&&p.sg)s+=1;return s;}
 const renewCount=p=>p.cards.filter(c=>c.kind==="re").length;
 const buildCount=p=>p.cards.filter(c=>c.kind==="bd").length;
 const chipCap=p=>p.ess?5:0;
@@ -765,12 +824,12 @@ function banned(S,card){const ev=S.ev?S.ev.id:"";if(S.phase!=="turn")return "";
 const evDeckNow=S=>S.evDecks[1].length?S.evDecks[1]:S.evDecks[2];
 
 function startRound(S){
- S.round++;S.cur=0;S.acted=false;S.traded=false;S.flags={};S.phase="turn";
+ S.round++;S.start=(S.round-1)%S.n;S.cur=S.start;S.turnN=0;S.acted=false;S.traded=false;S.flags={};S.phase="turn";
  if(S.forecastCD>0)S.forecastCD--;
  if(!S.evDecks[1].length&&!S.evDecks[2].length){for(const e of EV_DATA)if(e[0]===2)for(let k=0;k<e[4];k++)S.evDecks[2].push({half:2,id:e[1],cat:e[2],name:e[3],text:e[5]});shuffle(S.evDecks[2]);}
  if(S.round>1&&S.evDecks[1].length){const add=S.players.reduce((t,p)=>t+fossilCards(p).length,0);S.carbonAdd=add;
-  if(add){S.carbon=Math.min(CARBON_MAX,S.carbon+add);log(S,`탄소 게이지 +${add} (화력 발전소 ${add}장) → ${S.carbon}/${CARBON_MAX}`);}
-  if(S.carbon>=CARBON_MAX){S.evDecks[1]=[];S.earlyCrisis=S.round;log(S,`탄소 게이지가 가득 찼어요! 기후 위기(후반)가 앞당겨졌어요`);}}
+  if(add){S.carbon=Math.min(S.carbonMax,S.carbon+add);log(S,`탄소 게이지 +${add} (화력 발전소 ${add}장) → ${S.carbon}/${S.carbonMax}`);}
+  if(S.carbon>=S.carbonMax){S.evDecks[1]=[];S.earlyCrisis=S.round;log(S,`탄소 게이지가 가득 찼어요! 기후 위기(후반)가 앞당겨졌어요`);}}
  const deck=evDeckNow(S);
  const fp=S.players.findIndex(p=>p.role==="forecaster");
  if(fp>=0&&S.forecastCD===0&&deck.length>=2){S.pending={type:"forecast",player:fp,options:[deck.shift(),deck.shift()]};return;}
@@ -785,6 +844,7 @@ function revealEvent(S,ev){
  if(ev.id==="tech")S.flags.t3Disc=1;
  if(ev.id==="oil")S.flags.noFossil=1;
  if(ev.id==="uranium")S.flags.noUranium=1;
+ if(ev.id==="ccs"){const b=S.carbon||0;S.carbon=Math.max(0,b-3);log(S,`탄소 포집: 탄소 게이지 ${b} → ${S.carbon}`);}
  if(ev.id==="coop")S.pending={type:"coop",queue:S.players.map((_,i)=>i)};}
 
 function chooseCoop(S,r){const q=S.pending.queue;const i=q.shift();const p=S.players[i];
@@ -794,7 +854,7 @@ function chooseCoop(S,r){const q=S.pending.queue;const i=q.shift();const p=S.pla
 // ----- 구매 -----
 function costFor(S,p,card){const b=bonuses(p);const need={};const wild=[];const notes=[];
  for(const r of RES)need[r]=Math.max(0,(card.cost[r]||0)-b[r]);
- if(p.role==="techdev"&&p.chips>(card.cost.elec||0)){const from=RES.find(r=>b[r]>(card.cost[r]||0));if(from)wild.push({src:"tech",from});}
+ if(p.role==="techdev"&&card.tier>=2&&!(p.techUsed>=S.round-1)&&p.chips>(card.cost.elec||0)){const from=RES.find(r=>b[r]>(card.cost[r]||0));if(from)wild.push({src:"tech",from});}
  if(S.flags.renewDisc&&card.kind==="re")wild.push({src:"renew"});
  if(S.flags.t3Disc&&card.tier===3)wild.push({src:"t3"});
  for(const w of wild){let best=null,bs=-1e9;for(const r of RES){if(need[r]<=0)continue;const sc=(need[r]-p.tokens[r])*100+need[r];if(sc>bs){bs=sc;best=r;}}
@@ -802,13 +862,14 @@ function costFor(S,p,card){const b=bonuses(p);const need={};const wild=[];const 
  return {need,elec:(card.cost.elec||0)+(notes.some(n=>n.startsWith("기술 개발자"))?1:0),notes};}
 function canBuy(S,p,card){if(p.role==="activist"&&card.kind==="fo")return false;if(banned(S,card))return false;const c=costFor(S,p,card);return RES.every(r=>p.tokens[r]>=c.need[r])&&p.chips>=c.elec;}
 function buy(S,loc){const p=S.players[S.cur];let card;
+ if(loc.deck&&(loc.idx>0||p.role!=="investor"))return false;
  if(loc.deck){card=S.decks[loc.tier][loc.idx];}else card=S.market[loc.tier][loc.idx];
  if(!card||!canBuy(S,p,card)||S.acted)return false;
  const c=costFor(S,p,card);for(const r of RES){p.tokens[r]-=c.need[r];S.supply[r]+=c.need[r];}p.chips-=c.elec;if(c.notes.some(n=>n.startsWith("기술 개발자")))p.techUsed=S.round;
  if(loc.deck)S.decks[loc.tier].splice(loc.idx,1);else{S.market[loc.tier].splice(loc.idx,1);const nx=S.decks[loc.tier].shift();if(nx)S.market[loc.tier].splice(loc.idx,0,nx);}
  p.cards.push(card);log(S,`${p.name}: 「${card.name}」 구매`);
  S.acted=true;
- if(card.kind==="fo"){const q=S.players.map((q,i)=>i).filter(i=>S.players[i]!==p&&S.players[i].role==="activist"&&RES.some(r=>S.supply[r]>0));
+ if(card.kind==="fo"){const q=S.players.map((q,i)=>i).filter(i=>S.players[i]!==p&&S.players[i].role==="activist"&&S.players[i].actR!==S.round&&RES.some(r=>S.supply[r]>0));q.forEach(i=>S.players[i].actR=S.round);
   if(q.length){S.pending={type:"activist",queue:q,buyer:S.cur,card:card.name};return true;}}
  endTurn(S);return true;}
 function essState(S,p){if(p.ess)return "have";if(S.special.ess<=0)return "soldout";if(!p.essOpen)return "locked";return "open";}
@@ -840,8 +901,9 @@ function trade(S,ti,give,get){const p=S.players[S.cur],q=S.players[ti];if(p.role
 
 function endTurn(S){const p=S.players[S.cur];
  if(!p.sg&&p.ess&&S.special.sg>0&&renewCount(p)>=4){p.sg=true;S.special.sg--;log(S,`${p.name}: 스마트그리드 획득! (+2점, ESS와 함께 +1점)`);}
- S.cur++;S.acted=false;S.traded=false;
- if(S.cur>=S.n){S.cur=S.n-1;S.phase="roundEnd";S.pending={type:"roundEnd",runs:S.players.map((p,i)=>bestRun(S,i))};}}
+ checkGoals(S,p);
+ S.turnN=(S.turnN||0)+1;S.cur=(S.cur+1)%S.n;S.acted=false;S.traded=false;
+ if(S.turnN>=S.n){S.cur=((S.start||0)+S.n-1)%S.n;S.phase="roundEnd";S.pending={type:"roundEnd",runs:S.players.map((p,i)=>bestRun(S,i))};}}
 
 // ----- 전력 점검 -----
 function fossilCards(p){return p.cards.filter(c=>c.kind==="fo");}
@@ -857,7 +919,7 @@ function powerCalc(S,p,run=0){const ev=S.ev?S.ev.id:"";let gen=0,wl=0;const fo=f
  const mit=p.sg?Math.min(2,wl):0;gen+=mit;
  let grid=0;if(ev==="gridfail"&&!p.sg){grid=Math.min(3,gen);gen-=grid;}
  let cons=p.cards.filter(c=>c.power<0).reduce((a,c)=>a-c.power,0);
- const extra={cloudy:1,typhoon:1,heat:3,cold:S.ev&&S.ev.half===2?3:2,heatwind:2,xheat:4}[ev]||0;cons+=extra;
+ const extra={save:-2,dr:p.sg?-3:-2,cloudy:1,typhoon:1,heat:2,cold:S.ev&&S.ev.half===2?3:2,heatwind:2,xheat:4}[ev]||0;cons=Math.max(0,cons+extra);
  let tax=0;if(ev==="ctax")tax=p.cards.filter(c=>c.name==="석탄화력").length;
  if(ev==="ctax2")tax=p.cards.filter(c=>c.name==="석탄화력").length*2+p.cards.filter(c=>c.name==="LNG화력").length;
  const net=gen-cons;let store=0,useChips=0,lose=0,waste=0;
@@ -888,7 +950,7 @@ function resolveRoundEnd(S,runs){
   log(S,S.tie?`게임 끝! 공동 승리: ${S.tie.map(i=>S.players[i].name).join(", ")} (${ranked[0].pts}점)`:`게임 끝! ${S.players[ranked[0].i].name} 승리 (${ranked[0].pts}점)${S.tieBreak?" · 동점이라 카드를 더 적게 산 사람이 이겼어요":""}`);return;}
  startRound(S);}
 
-if(typeof module!=="undefined")module.exports={CARBON_MAX,banned,essState,canBuyEss,buyEss,ESS_CARD,offLoss,deficitOf,poweredPoints,chooseActivist,setCap,RES,RL,CARD_DATA,EV_DATA,ROLES,newGame,startRound,chooseForecast,chooseCoop,costFor,canBuy,buy,takeCheck,take,discard,pass,trade,powerCalc,bestRun,resolveRoundEnd,points,bonuses,sum,renewCount,buildCount,chipCap,HAND};
+if(typeof module!=="undefined")module.exports={GOALS,GOAL_PTS,goalDef,goalMet,checkGoals,CARBON_MAX,banned,essState,canBuyEss,buyEss,ESS_CARD,offLoss,deficitOf,poweredPoints,chooseActivist,setCap,RES,RL,CARD_DATA,EV_DATA,ROLES,newGame,startRound,chooseForecast,chooseCoop,costFor,canBuy,buy,takeCheck,take,discard,pass,trade,powerCalc,bestRun,resolveRoundEnd,points,bonuses,sum,renewCount,buildCount,chipCap,HAND};
 
 </script>
 <script>
@@ -910,7 +972,7 @@ function cardHTML(c,loc){const p=cur();const ban=banned(S,c);const can=S.phase==
  const isSel=picked&&picked.tier===loc.tier&&picked.idx===loc.idx&&!!picked.deck===!!loc.deck;
  const costs=[...RES,"elec"].filter(r=>(c.cost[r]||0)>0).map(r=>{const n=r==="elec"?k.elec:k.need[r];const have=r==="elec"?p.chips:p.tokens[r];return `<span class="ct ${have<n?"short":""}" style="--c:${COL[r]}" title="${RL[r]} ${n} (원래 ${c.cost[r]})">${n}</span>`;}).join("");
  return `<div class="mcard ${can?"can":"cant"} ${isSel?"sel":""} ${ban?"banned":""}" style="--kc:${KC[c.kind]}" tabindex="0" role="button" data-buy='${JSON.stringify(loc)}' ${ban?`data-ban="${esc(ban)}: 이번 라운드엔 「${esc(c.name)}」을(를) 살 수 없어요"`:""} aria-label="${esc(c.name)}, ${c.pts}점, 전력 ${c.power}${ban?", 구매 금지":""}">
-  <div class="gart">${art(c.name)}<span class="${pc}">${sgn(c.pts)}</span>${c.bonus?`<span class="b-bonus" style="--c:${COL[c.bonus]}"><span>${RK[c.bonus]}</span></span>`:""}<span class="b-pow ${c.power>0?"gen":"use"}">${BOLTS}${sgn(c.power)}</span>${ban?`<span class="banstrip">${esc(ban)} · 구매 금지</span>`:""}</div>
+  <div class="gart">${art(c.name)}<span class="${pc}">${sgn(c.pts)}</span>${c.bonus?`<span class="b-bonus" style="--c:${COL[c.bonus]}"><span>${RK[c.bonus]}</span></span>`:""}<span class="b-pow ${c.power>0?"gen":"use"}">${BOLTS}${sgn(c.power)}</span>${S.phase==="turn"&&!ban?(()=>{const miss=RES.reduce((a,r)=>a+Math.max(0,k.need[r]-p.tokens[r]),0)+Math.max(0,(k.elec||0)-p.chips);return miss?`<span class="needtag">${miss}개 더 필요</span>`:`<span class="needtag ok">지금 살 수 있음</span>`;})():""}${ban?`<span class="banstrip">${esc(ban)} · 구매 금지</span>`:""}</div>
   <div class="mb"><div class="nm">${esc(c.name)}</div><div class="costs">${costs||'<span class="help">무료</span>'}</div></div></div>`;}
 
 
@@ -924,8 +986,8 @@ function pIdx(name){return S.players.findIndex(q=>q.name===name);}
 function carbonFx(n,total){if(!S)return;const from=total-n;ui.cPend={round:S.round,from,to:total,arrived:0};
  const counts=S.players.map(q=>q.cards.filter(c=>c.kind==="fo").length);
  const red=matchMedia("(prefers-reduced-motion: reduce)").matches;
- fxPush({ms:1500+n*170,html:`<div class="fxbox fxcarbon2" style="--out:${(1.15+n*.17).toFixed(2)}s"><b>🏭 탄소 +${n}</b><span>화력 발전소에서 탄소가 나왔어요 → 탄소 게이지 ${total}/${CARBON_MAX}</span></div>`,
-  run(layer){const gs=[...document.querySelectorAll(".cgauge")];const vis=g=>{const r=g.getBoundingClientRect();return r.bottom>0&&r.top<innerHeight&&r.width>0;};const tg=gs.find(g=>g.classList.contains("mini")&&vis(g))||gs.find(vis)||gs[0];const segs=tg?[...tg.querySelectorAll(".seg i")]:[];document.querySelectorAll(".cgauge .seg i").forEach((g,n)=>{const k=n%CARBON_MAX;if(k>=from&&k<total)g.classList.add("pend");});
+ fxPush({ms:1500+n*170,html:`<div class="fxbox fxcarbon2" style="--out:${(1.15+n*.17).toFixed(2)}s"><b>🏭 탄소 +${n}</b><span>화력 발전소에서 탄소가 나왔어요 → 탄소 게이지 ${total}/${(S.carbonMax||CARBON_MAX)}</span></div>`,
+  run(layer){const gs=[...document.querySelectorAll(".cgauge")];const vis=g=>{const r=g.getBoundingClientRect();return r.bottom>0&&r.top<innerHeight&&r.width>0;};const tg=gs.find(g=>g.classList.contains("mini")&&vis(g))||gs.find(vis)||gs[0];const segs=tg?[...tg.querySelectorAll(".seg i")]:[];document.querySelectorAll(".cgauge .seg i").forEach((g,n)=>{const k=n%(S.carbonMax||CARBON_MAX);if(k>=from&&k<total)g.classList.add("pend");});
    const panels=[...document.querySelectorAll(".players .pl")];let k=0;
    counts.forEach((c,pi)=>{for(let j=0;j<c&&from+k<total;j++,k++){const idx=from+k,dl=k*.17;
     const pr=panels[pi]&&panels[pi].getBoundingClientRect();const vis=pr&&pr.bottom>0&&pr.top<innerHeight;
@@ -935,11 +997,20 @@ function carbonFx(n,total){if(!S)return;const from=total-n;ui.cPend={round:S.rou
     if(!red)layer.appendChild(d);
     setTimeout(()=>{document.querySelectorAll(".cgauge").forEach(gg=>{const g=gg.querySelectorAll(".seg i")[idx];if(g){g.classList.remove("pend");g.classList.add("pop");}});if(ui.cPend)ui.cPend.arrived++;try{tone(180-idx*4,0,.18,"square",.05,120);}catch(e){}},red?0:(dl+1.05)*1000);}});
    setTimeout(()=>{ui.cPend=null;document.querySelectorAll(".cgauge .seg i.pend").forEach(g=>g.classList.remove("pend"));},(1.4+n*.17)*1000);}});}
-function cgaugeHTML(mini){if(!S)return "";const full=S.carbon>=CARBON_MAX,h2=!S.evDecks[1].length&&S.ev&&S.ev.half===2;const per=S.players.reduce((t,q)=>t+q.cards.filter(c=>c.kind==="fo").length,0);
- const segs=Array.from({length:CARBON_MAX},(_,k)=>`<i class="${k<S.carbon?"on":""} ${k<S.carbon&&k>=CARBON_MAX-4?"hot":""} ${ui.cPend&&ui.cPend.round===S.round&&k>=ui.cPend.from+ui.cPend.arrived&&k<ui.cPend.to?"pend":""}"></i>`).join("");
+function goalProg(p,g){return g.need(p).map(([l,hv,n])=>({l,hv:Math.min(hv,n),n,ok:hv>=n}));}
+function goalsHTML(){if(!S||!S.goals)return "";const p=cur();
+ return `<div class="goals"><h3>🎯 정책 목표 카드 <small>먼저 조건을 채운 사람이 +${GOAL_PTS}점 (스플렌더의 귀족) · 숫자는 ${esc(p.name)}의 진행 상황</small></h3><div class="grow">${S.goals.map(G=>{const g=goalDef(G.id);if(!g)return "";
+  if(G.owner!=null)return `<div class="gl own"><div class="gt"><span class="ic">${g.icon}</span>${esc(g.name)}<span class="pt">+${GOAL_PTS}</span></div><div class="gx">${esc(g.text)}</div><div class="who">✔ ${esc(S.players[G.owner].name)} 달성</div></div>`;
+  const pr=goalProg(p,g);const left=pr.reduce((a,x)=>a+(x.n-x.hv),0);
+  return `<div class="gl ${left<=1?"near":""}"><div class="gt"><span class="ic">${g.icon}</span>${esc(g.name)}<span class="pt">+${GOAL_PTS}</span></div><div class="gx">${esc(g.text)}</div><div class="gp">${pr.map(x=>`<span class="${x.ok?"ok":""}">${esc(x.l)} ${x.hv}/${x.n}</span>`).join("")}</div></div>`;}).join("")}</div></div>`;}
+function nearGoal(p){if(!S||!S.goals)return "";let best=null,bl=99;for(const G of S.goals){if(G.owner!=null)continue;const g=goalDef(G.id);const pr=goalProg(p,g);const left=pr.reduce((a,x)=>a+(x.n-x.hv),0);if(left<bl){bl=left;best={g,pr};}}
+ if(!best)return "";return `<div class="wl-goal">🎯 가장 가까운 목표: ${best.g.icon} ${esc(best.g.name)} · ${best.pr.filter(x=>!x.ok).map(x=>`${esc(x.l)} ${x.hv}/${x.n}`).join(", ")||"달성 직전"}</div>`;}
+function cgaugeHTML(mini){if(!S)return "";const full=S.carbon>=(S.carbonMax||CARBON_MAX),h2=!S.evDecks[1].length&&S.ev&&S.ev.half===2;const per=S.players.reduce((t,q)=>t+q.cards.filter(c=>c.kind==="fo").length,0);
+ const segs=Array.from({length:(S.carbonMax||CARBON_MAX)},(_,k)=>`<i class="${k<S.carbon?"on":""} ${k<S.carbon&&k>=(S.carbonMax||CARBON_MAX)-4?"hot":""} ${ui.cPend&&ui.cPend.round===S.round&&k>=ui.cPend.from+ui.cPend.arrived&&k<ui.cPend.to?"pend":""}"></i>`).join("");
  const note=full?(S.earlyCrisis?`가득 참! ${S.earlyCrisis}라운드에 기후 위기가 앞당겨졌어요`:"가득 참"):h2?"이미 기후 위기(후반)예요":mini?`라운드마다 +${per}`:`화력 발전소 1장마다 라운드 끝에 +1 · 가득 차면 기후 위기(후반)가 바로 시작돼요 · 지금 라운드마다 +${per}`;
- return `<div class="cgauge ${mini?"mini":""} ${full?"full":""}" role="img" aria-label="탄소 게이지 ${S.carbon}/${CARBON_MAX}"><span class="cl">🌍 탄소 ${S.carbon}/${CARBON_MAX}</span><span class="seg">${segs}</span><small>${note}</small></div>`;}
+ return `<div class="cgauge ${mini?"mini":""} ${full?"full":""}" role="img" aria-label="탄소 게이지 ${S.carbon}/${(S.carbonMax||CARBON_MAX)}"><span class="cl">🌍 탄소 ${S.carbon}/${(S.carbonMax||CARBON_MAX)}</span><span class="seg">${segs}</span><small>${note}</small></div>`;}
 function fxFromLog(l){let m;
+ if((m=l.match(/^(.+?): 정책 목표 「(.+)」 달성!/))){const g=GOALS.find(x=>x.name===m[2]);fxPush({tap:true,snd:"sgDone",ms:2600,html:`<div class="fxbox fxgoal" style="--out:2.2s"><span class="big">${g?g.icon:"🎯"}</span><b>${esc(m[1])} · 정책 목표 달성!</b><span>「${esc(m[2])}」 +${GOAL_PTS}점</span><span class="tapx">눌러서 닫기</span></div>`});return;}
  if((m=l.match(/^탄소 게이지 \+(\d+) \(화력 발전소 \d+장\) → (\d+)\//))){carbonFx(+m[1],+m[2]);return;}
  if(/: 「ESS」 구매$/.test(l))return;
  if((m=l.match(/^(.+?): 「(.+)」 구매$/))){const src=IMG[m[2]];const pic=src?`<img src="${src}" alt="">`:art(m[2]);
@@ -965,7 +1036,7 @@ function fxScan(){if(!S){ui.fxKey=null;return;}
  const key=S.players.map(q=>q.name+q.role).join("|");const top=S.log[0];const ck=S.cur+"/"+S.round+"/"+S.phase;
  if(ui.fxKey!==key){ui.fxKey=key;ui.fxTop=top;ui.fxCur=ck;ui.settleSeen=S.settle?S.settle.round+"/"+key:null;return;}
  if(top!==ui.fxTop){let k=S.log.indexOf(ui.fxTop);if(k<0)k=Math.min(2,S.log.length);const news=S.log.slice(0,k).reverse();ui.fxTop=top;news.forEach(fxFromLog);}
- if(ck!==ui.fxCur){ui.fxCur=ck;const roundStart=S.cur===0&&!S.acted&&(ui.evSeen!==S.round);
+ if(ck!==ui.fxCur){ui.fxCur=ck;const roundStart=S.cur===(S.start||0)&&!S.acted&&(ui.evSeen!==S.round);
   if(S.phase==="turn"&&!roundStart&&!S.pending)fxTurn();}}
 function fxTurn(){const on=typeof isOnline==="function"&&isOnline();const mine=on&&typeof myControl==="function"&&myControl();const q=S.players[S.cur];
  fxPush({snd:mine?"myturn":"tick",ms:mine?1500:1100,html:`<div class="fxbox fxturn" style="--pc:${PCOL[S.cur%4]};--out:${mine?"1.15s":".8s"}"><b>${mine?"내 차례예요!":`이제 ${esc(q.name)}의 차례`}</b></div>`});}
@@ -979,19 +1050,19 @@ function render(){
  let h=`<div class="topbar"><div class="brand"><h1>에너지 전환</h1><span>${S.round}라운드 · ${half} · 목표 ${15}점${isOnline()?` · 방 ${esc(NET.code)}`:""}</span></div>`;
  h+=ev?`<div class="evbox" style="--ec:${EVC[ev.cat]}"><div class="left"><span class="tag">이번 라운드 이벤트 · ${EVL[ev.cat]}</span><span class="nm">${esc(ev.name)}</span><p>${esc(ev.text)}</p></div></div>`:`<div class="evbox"><p>이벤트를 고르는 중…</p></div>`;
  h+=`<div class="topbtns"><button class="sndbtn" data-act="snd" aria-pressed="${SND.on}">${SND.on?"소리 켬":"소리 끔"}</button><button data-act="roles">역할</button><button data-act="rules">규칙</button><button data-act="newgame">${isOnline()?"방 나가기":"새 게임"}</button></div></div>`;
- h+=cgaugeHTML(false);
+ h+=cgaugeHTML(false);h+=goalsHTML();
  {const on=typeof isOnline==="function"&&isOnline();const mine=on&&typeof myControl==="function"&&myControl();const PC=["#2F7D46","#2F6FB0","#C0532F","#8A5A2B"];
  const who=S.phase==="roundEnd"?null:S.cur;const col=who===null?"#8C9AA2":PC[who%4];
  const txt=who===null?"라운드 끝 · 전력 점검 중":on?(mine?"내 차례예요!":`${esc(S.players[who].name)}의 차례`):`${esc(S.players[who].name)}의 차례`;
- const sub=who===null?"":on?(mine?"토큰 가져오기 · 카드 사기 · 패스 중 하나를 고르세요":"기다리는 중…"):`${who+1}번째 순서 · 토큰 가져오기 · 카드 사기 · 패스 중 하나`;
+ const sub=who===null?"":on?(mine?"토큰 가져오기 · 카드 사기 · 패스 중 하나를 고르세요":"기다리는 중…"):`${((who-(S.start||0)+S.n)%S.n)+1}번째 순서 · 토큰 가져오기 · 카드 사기 · 패스 중 하나`;
  h+=`<div class="turnbar ${mine?"mine":""}" style="--pc:${col}" role="status" aria-live="polite"><span class="dot"></span><span>${txt}</span><small>${sub}</small></div>`;}
 h+=`<div class="main"><div class="market">`;
- for(const t of [3,2,1]){h+=`<div class="row"><div class="deck"><span>${["","Ⅰ","Ⅱ","Ⅲ"][t]}단계</span><b>${S.decks[t].length}</b><span>남은 카드</span>${p.role==="investor"&&S.phase==="turn"&&!S.acted?`<button data-act="peek" data-tier="${t}">${peekTier===t?"닫기":"덱 위 2장"}</button>`:""}</div>`;
+ for(const t of [3,2,1]){h+=`<div class="row"><div class="deck"><span>${["","Ⅰ","Ⅱ","Ⅲ"][t]}단계</span><b>${S.decks[t].length}</b><span>남은 카드</span>${p.role==="investor"&&S.phase==="turn"&&!S.acted?`<button data-act="peek" data-tier="${t}">${peekTier===t?"닫기":"덱 위 1장"}</button>`:""}</div>`;
   S.market[t].forEach((c,i)=>h+=cardHTML(c,{tier:t,idx:i}));for(let i=S.market[t].length;i<4;i++)h+=`<div></div>`;h+=`</div>`;
-  if(peekTier===t&&p.role==="investor")h+=`<div class="row"><div></div><div class="peek"><span class="help" style="width:100%">투자자만 보는 덱 맨 위 2장. 눌러서 살 수 있어요.</span>${S.decks[t].slice(0,2).map((c,i)=>cardHTML(c,{tier:t,idx:i,deck:true})).join("")}</div></div>`;}
+  if(peekTier===t&&p.role==="investor")h+=`<div class="row"><div></div><div class="peek"><span class="help" style="width:100%">투자자만 보는 덱 맨 위 1장. 눌러서 살 수 있어요.</span>${S.decks[t].slice(0,1).map((c,i)=>cardHTML(c,{tier:t,idx:i,deck:true})).join("")}</div></div>`;}
  h+=`</div><div class="side">`;
  // action panel
- h+=`<div class="panel"><h3>${S.phase==="roundEnd"?"라운드 끝 정산":esc(p.name)+"의 차례"}${isOnline()?(LK?' <span class="waiting">· 기다리는 중</span>':' <span class="myturn">· 내 차례!</span>'):""}</h3>${cgaugeHTML(true)}<div class="mine">${(()=>{const b=bonuses(p);return RES.map(x=>`<span class="tk"><i style="--c:${COL[x]}">${p.tokens[x]}</i>${b[x]?`<em>+${b[x]}</em>`:""}</span>`).join("")+`<span class="tk"><i style="--c:var(--elec)">${p.chips}</i>칩</span><span class="tk"><b>${points(p)}점</b></span>`;})()}</div><div class="supply">${RES.map(r=>{const blocked=(S.flags.noFossil&&r==="fossil")||(S.flags.noUranium&&r==="uranium");return `<button class="tokbtn ${sel[r]?"on":""} ${blocked?"banned":""}" data-tok="${r}" ${blocked?`data-ban="${r==="fossil"?"유가 급등":"우라늄 수출 제한"}: 이번 라운드엔 ${RL[r]}을 가져올 수 없어요"`:""} ${!blocked&&(!S.supply[r]||LK||S.phase!=="turn"||S.acted)?"disabled":""} aria-label="${RL[r]} 남은 ${S.supply[r]}개${blocked?", 이번 라운드 금지":""}"><i style="--c:${COL[r]}">${RK[r]}</i><small>${blocked?"이번 라운드 금지":RL[r]+" "+S.supply[r]}</small><span class="pick">${sel[r]?"+"+sel[r]:""}</span></button>`;}).join("")}</div>`;
+ h+=`<div class="panel"><h3>${S.phase==="roundEnd"?"라운드 끝 정산":esc(p.name)+"의 차례"}${isOnline()?(LK?' <span class="waiting">· 기다리는 중</span>':' <span class="myturn">· 내 차례!</span>'):""}</h3>${cgaugeHTML(true)}<div class="wallet" aria-label="${esc(p.name)}이 가진 것">${(()=>{const b=bonuses(p);return `<div class="wl-hd"><span>${esc(p.name)}이 가진 것</span><b>${points(p)}점 · 토큰 ${sum(p.tokens)}/10</b></div><div class="wl-row">`+RES.map(x=>`<div class="wl ${p.tokens[x]+(b[x]||0)?"":"zero"}"><i style="--c:${COL[x]}">${RK[x]}</i><span class="nm">${RL[x]}</span><b>${p.tokens[x]}</b>${b[x]?`<em>+${b[x]} 할인</em><span class="pw">살 때 총 ${p.tokens[x]+b[x]}</span>`:""}</div>`).join("")+`<div class="wl"><i style="--c:var(--elec)">⚡</i><span class="nm">전기 칩</span><b>${p.chips}</b><em class="no">${p.ess?"최대 5":"ESS 없음"}</em></div></div>`+nearGoal(p);})()}</div><div class="supply">${RES.map(r=>{const blocked=(S.flags.noFossil&&r==="fossil")||(S.flags.noUranium&&r==="uranium");return `<button class="tokbtn ${sel[r]?"on":""} ${blocked?"banned":""}" data-tok="${r}" ${blocked?`data-ban="${r==="fossil"?"유가 급등":"우라늄 수출 제한"}: 이번 라운드엔 ${RL[r]}을 가져올 수 없어요"`:""} ${!blocked&&(!S.supply[r]||LK||S.phase!=="turn"||S.acted)?"disabled":""} aria-label="${RL[r]} 남은 ${S.supply[r]}개${blocked?", 이번 라운드 금지":""}"><i style="--c:${COL[r]}">${RK[r]}</i><small>${blocked?"이번 라운드 금지":RL[r]+" "+S.supply[r]}</small><span class="pick">${sel[r]?"+"+sel[r]:""}</span></button>`;}).join("")}</div>`;
  if(picked){const c=picked.deck?S.decks[picked.tier][picked.idx]:S.market[picked.tier][picked.idx];if(c){const k=costFor(S,p,c);const pay=[...RES.filter(r=>k.need[r]).map(r=>RL[r]+" "+k.need[r]),...(k.elec?["전기 칩 "+k.elec]:[])].join(", ")||"무료";
   const bal=powerCalc(S,p).gen-powerCalc(S,p).cons;const after=bal+c.power;
   h+=`<div class="help"><b>${esc(c.name)}</b> 지불: ${pay}${c.power<0&&after<0?`<br><span class="bad">주의: 사면 이번 이벤트 기준 전력이 ${after}가 돼요</span>`:""}${k.notes.map(n=>`<br><span class="ok">${esc(n)}</span>`).join("")}</div>`;}}
@@ -1015,7 +1086,7 @@ h+=`<div class="main"><div class="market">`;
  h+=`<div class="players">`+S.players.map((q,i)=>{const b=bonuses(q);const r=powerCalc(S,q,S.pending&&S.pending.type==="roundEnd"?S.pending.runs[i]:bestRun(S,i));const role=ROLES.find(x=>x.id===q.role);
   const total=Math.max(1,r.gen,r.cons);
   return `<div class="pl ${i===S.cur&&S.phase==="turn"?"cur":""} ${isOnline()&&i===ME?"me":""}"><div class="hd"><span class="who">${esc(q.name)}${isOnline()&&i===ME?" (나)":""}</span><span class="pts">${points(q)-offLoss(q,deficitOf(r))}<small>점</small>${offLoss(q,deficitOf(r))?`<small class="bad"> (정전 −${offLoss(q,deficitOf(r))})</small>`:""}</span></div>
-  <div class="role"><b>${role.name}</b> · ${role.lvl}<br>${role.text}${q.role==="activist"?"<br><i>상대가 화력을 사면 바로 창이 떠서 받을 토큰을 고를 수 있어요.</i>":""}${q.role==="techdev"?"<br><i>카드를 고르면 남는 할인이 가장 필요한 종류로 자동으로 바뀌어요. 바뀐 내용은 차례 칸에 초록 글씨로 보여요.</i>":""}</div>
+  <div class="role"><b>${role.name}</b> · ${role.lvl}<br>${role.text}${q.role==="activist"?"<br><i>상대가 화력을 사면 바로 창이 떠서 받을 토큰을 고를 수 있어요 (라운드에 1번).</i>":""}${q.role==="techdev"?"<br><i>2·3단계 카드를 고르면 남는 할인이 가장 필요한 종류로 자동으로 바뀌어요 (2라운드에 1번). 바뀐 내용은 차례 칸에 초록 글씨로 보여요.</i>":""}</div>
   <div class="toks">${RES.map(x=>`<span class="tk"><i style="--c:${COL[x]}">${q.tokens[x]}</i>${RL[x]}${b[x]?` <em>+${b[x]}</em>`:""}</span>`).join("")}<span class="tk"><i style="--c:var(--elec)">${q.chips}</i>${q.ess?"칩/5":"저장 불가"}</span></div>
   <div class="pow"><span>발전 <b>${r.gen}</b> · 소비 <b>${r.cons}</b></span><span class="bar" aria-hidden="true"><i style="width:${r.gen/total*50}%;background:#2F7D46"></i><i style="width:${50-r.gen/total*50}%"></i><i style="width:${r.cons/total*50}%;background:#B4472F"></i></span><span class="${r.net>=0?"ok":"bad"}">${r.net>=0?"여유 "+r.net:"부족 "+(-r.net)}</span>${(()=>{const d=deficitOf(r);return d>0?`<span class="stat risk">🔴 정전 위험</span>`:r.net<0?`<span class="stat edge">🟡 저장 전기로 버팀</span>`:r.net<=1?`<span class="stat edge">🟡 아슬아슬</span>`:`<span class="stat safe">🟢 안전</span>`;})()}</div>
   ${r.net<0?`<span class="help bad">라운드 끝 예상: ${r.useChips?`칩 ${r.useChips}개 사용, `:""}토큰 ${Math.min(r.lose,sum(q.tokens))}개 반납${offLoss(q,deficitOf(r))?`, 전기가 끊긴 건물 점수 −${offLoss(q,deficitOf(r))}`:""}</span>`:""}${r.tax?`<span class="help bad">탄소세: 토큰 ${r.tax}개 반납 예정</span>`:""}
@@ -1145,16 +1216,18 @@ function renderModal(){const m=document.getElementById("modal");const pd=S.pendi
  {const rk0=S.players.map(q=>q.name+q.role).join("|");const fresh0=S.round===1&&!S.log.some(l=>/가져옴|구매|패스/.test(l));if(fresh0&&ui.rulesSeen!==rk0&&!ui.rules){ui.rules=true;ui.rulesFirst=true;}}
  if(ui.rules){m.innerHTML=`<div class="overlay"><div class="modal" role="dialog" aria-label="규칙" style="max-width:760px"><h2>${ui.rulesFirst?"시작 전에 규칙부터!":"규칙 요약"}</h2>${ui.rulesFirst?`<p class="help">처음 한 번은 자동으로 떠요. 게임 중에도 위쪽 「규칙」 버튼으로 언제든 다시 볼 수 있어요.</p>`:""}
   <p><b>목표</b>: 라운드가 끝났을 때 누군가 15점 이상이면 게임 끝 (전기가 끊긴 건물 점수는 빼고 계산). 점수가 가장 높은 사람이 이기고, 같으면 카드를 더 적게 산 사람이 이겨요. 그것까지 같으면 공동 승리예요.</p>
+  <p><b>순서</b>: 라운드마다 시작하는 사람이 한 칸씩 바뀌어요 (1라운드 1번 → 2라운드 2번…). 먼저 하는 사람이 유리하지 않게 하려는 규칙이에요.</p>
   <p><b>내 차례 (하나만)</b>: 서로 다른 토큰 3개까지 가져오기 · 카드 1장 사기 · 패스. 손패는 10개까지.</p>
   <p><b>토큰</b>: 돈 · 인력 · 화석 · 부지 4종류와 원자력·SMR에만 쓰는 우라늄이 있어요.</p>
   <p><b>할인</b>: 산 카드의 오른쪽 위 마름모가 그 토큰의 영구 할인이에요. 기업·병원은 할인 대신 점수를 더 줘요.</p>
   <p><b>이벤트</b>: 라운드 시작에 1장 공개되고 그 라운드 내내 적용돼요. 전반 15장 → 후반 15장(기후 위기).</p>
-  <p><b>🌍 탄소 게이지 (모두 함께)</b>: 라운드가 끝날 때마다 모든 사람의 화력 발전소 수만큼 게이지가 올라가요 (12칸). 가득 차면 남은 전반 이벤트를 버리고 <b>기후 위기(후반)가 바로 시작</b>돼요. 내가 화력을 사면 모두가 피해를 봐요.</p>
+  <p><b>🎯 정책 목표 카드</b>: 게임 시작 때 (인원+1)장이 공개돼요. 조건을 먼저 채운 사람이 자동으로 가져가고 <b>+3점</b>을 받아요. 스플렌더의 귀족 카드처럼, 어떤 카드를 모을지 방향을 잡는 데 쓰세요.</p>
+  <p><b>🌍 탄소 게이지 (모두 함께)</b>: 라운드가 끝날 때마다 모든 사람의 화력 발전소 수만큼 게이지가 올라가요 (2명 10칸 · 3명 12칸 · 4명 15칸). 가득 차면 남은 전반 이벤트를 버리고 <b>기후 위기(후반)가 바로 시작</b>돼요. 내가 화력을 사면 모두가 피해를 봐요.</p>
   <p><b>라운드 끝 전력 점검</b>: 발전 합계와 소비 합계를 비교해요. 남으면 <b>ESS가 있을 때만</b> 5개까지 저장하고, 없으면 버려져요(출력제한). 모자라면 저장한 전기를 먼저 쓰고, 그래도 모자라면 토큰을 반납해요 (라운드당 최대 2개, 많이 가진 종류부터 자동 반납). 그리고 모자란 만큼 <b>건물 전기가 끊겨서 그 건물 점수는 빠져요</b>. 게임이 끝나는 라운드에 정전이면 점수를 잃으니 끝까지 전력을 챙겨야 해요.</p>
   <p><b>전기 칩</b>: 정전 막기와 AI 데이터센터·공장·해상풍력 비용에만 써요.</p>
   <p><b>ESS</b>: 정전을 한 번 겪으면 열리는 특별 카드 (돈 2·인력 1·부지 2, +1점). 전기를 5개까지 저장해요. <b>스마트그리드</b>: ESS + 재생에너지 4장이면 자동 획득 (+2점). 정전 때 덜 중요한 건물부터 끄고, 날씨 손실을 2 덜 받아요. 없으면 점수 높은 건물부터 꺼져요. 둘 다 있으면 +1점.</p>
   <p><b>점검·규제 이벤트</b>: 빨간 ✕가 쳐진 카드와 토큰은 그 라운드에 살 수 없거나 가져올 수 없어요.</p>
-  <div class="tipbox"><b>처음 하는 사람 팁</b><ol><li>처음엔 1단계 <b>발전소</b>(태양광·풍력)로 전기부터 만드세요.</li><li><b>건물</b>은 전기가 남을 때 사세요. 전기가 모자라면 라운드마다 토큰을 잃어요.</li><li>정전을 겪으면 <b>ESS</b>가 열려요. 2~3라운드 안에 꼭 설치하세요.</li><li>3단계 카드는 할인이 모인 뒤에 노리세요. 초반에 무리하면 회복이 어려워요.</li><li>매 라운드 시작에 뜨는 <b>이벤트</b>를 꼭 읽으세요. 날씨에 따라 발전량이 바뀌어요.</li><li>화력은 날씨와 상관없이 안정적이지만 <b>탄소 게이지</b>를 올려요. 다 같이 화력을 쓰면 기후 위기가 빨리 와요.</li></ol></div>
+  <div class="tipbox"><b>처음 하는 사람 팁</b><ol><li>시작할 때 <b>정책 목표 카드</b>를 보고 노릴 목표를 하나 정하세요. 내 자원 칸 아래에 가장 가까운 목표가 보여요.</li><li>처음엔 1단계 <b>발전소</b>(태양광·풍력)로 전기부터 만드세요.</li><li><b>건물</b>은 전기가 남을 때 사세요. 전기가 모자라면 라운드마다 토큰을 잃어요.</li><li>정전을 겪으면 <b>ESS</b>가 열려요. 2~3라운드 안에 꼭 설치하세요.</li><li>3단계 카드는 할인이 모인 뒤에 노리세요. 초반에 무리하면 회복이 어려워요.</li><li>매 라운드 시작에 뜨는 <b>이벤트</b>를 꼭 읽으세요. 날씨에 따라 발전량이 바뀌어요.</li><li>화력은 날씨와 상관없이 안정적이지만 <b>탄소 게이지</b>를 올려요. 다 같이 화력을 쓰면 기후 위기가 빨리 와요.</li></ol></div>
   <div class="actions"><button class="primary" data-act="closerules">${ui.rulesFirst?"다음: 역할 보기":"닫기"}</button></div></div></div>`;return;}
  {const rk=S.players.map(q=>q.name+q.role).join("|");const fresh=S.round===1&&!S.log.some(l=>/가져옴|구매|패스/.test(l));
  if(ui.showRoles||(fresh&&ui.rolesSeen!==rk)){const on=typeof isOnline==="function"&&isOnline();const me=on&&typeof mySeat==="function"?mySeat():-1;
@@ -1219,7 +1292,7 @@ const EVIMG={"good": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAY
  const conv=(obj,pre)=>{for(const k of Object.keys(obj)){const v=obj[k];if(typeof v!=="string"||v.slice(0,5)!=="data:")continue;try{const c=v.indexOf(",");const mime=v.slice(5,v.indexOf(";"));const bin=atob(v.slice(c+1));const u=new Uint8Array(bin.length);for(let n=0;n<bin.length;n++)u[n]=bin.charCodeAt(n);orig[pre+k]=[obj,k,v];obj[k]=URL.createObjectURL(new Blob([u],{type:mime}));}catch(e){}}};
  conv(IMG,"i:");conv(EVIMG,"e:");const first=Object.values(orig)[0];if(!first)return;
  const t=new Image();t.onerror=()=>{for(const [o,k,v] of Object.values(orig))o[k]=v;try{if(typeof render==="function")render();}catch(e){}};t.src=first[0][first[1]];})();
-const EVFX={sunny:["good","rays glow birds","chime"],safety:["industry","beacon stamp","alarm"],heatwind:["heat","heat sun turbine|wobble","heat"],gale:["@풍력","wind leaves|sway","whoosh"],subsidy:["plant","glow coins spark","chime"],save:["plant","spark","chime"],
+const EVFX={save:["@가정","glow spark lightsoff","chime"],ccs:["good","rays glow co2up","chime"],dr:["@스마트그리드","glow spark","chime"],sunny:["good","rays glow birds","chime"],safety:["industry","beacon stamp","alarm"],heatwind:["heat","heat sun turbine|wobble","heat"],gale:["@풍력","wind leaves|sway","whoosh"],subsidy:["plant","glow coins spark","chime"],save:["plant","spark","chime"],
  cloudy:["bad","clouds dark","rain"],nowind:["@풍력","dark turbine","still"],monsoon:["bad","dark rain","rain"],drought:["crisis","heat sun gauge crack soft|dry","heat"],
  heat:["heat","heat sun|wobble","heat"],ctax:["industry","ticker stamp|thud","alarm"],nukecheck:["nuke","nuke stamp","geiger"],calm:["good","","calm"],
  tech:["@기술 개발자","glow spark","chime"],typhoon:["typhoon","dark rain heavy wind flash|storm","thunder"],longdrought:["crisis","heat sun gauge crack soft|dry wobble","heat"],
@@ -1335,6 +1408,9 @@ function crack(t0,vol){nz(t0,.4,vol,1100,"bandpass",.004,160,1.2);pad(58,t0,.5,v
 function iceSing(t0,vol){const f=2500+Math.random()*2500;pad(f,t0,.4,vol,"sine",.004,f/9);pad(f*1.5,t0+.02,.3,vol*.3,"sine",.004,f/6);}
 function printer(t0,dur,vol){for(let t=0;t<dur;t+=.045)nz(t0+t,.03,vol,2200,"bandpass",.002,null,3);pad(120,t0,dur,vol*.25,"square",.05);}
 const EVSND={
+ save(){[0,.35,.7].forEach((t,i)=>{nz(.3+t,.04,.3,2500,"bandpass",.002,null,3);pad(220-i*30,.3+t,.25,.05,"sine",.005);});[523,659,784].forEach((f,i)=>pad(f,1.4+i*.12,1.2,.06,"triangle",.02));},
+ ccs(){nz(.3,1.6,.18,2000,"bandpass",.3,300,2);pad(400,.3,1.6,.05,"sine",.3,150);[659,784,1047].forEach((f,i)=>pad(f,1.9+i*.1,1.1,.06,"triangle",.02));},
+ dr(){[392,494,587,784].forEach((f,i)=>pad(f,.3+i*.15,1.4,.05,"triangle",.02));nz(.3,1.8,.04,6000,"highpass",.6);},
  sunny(){sample(BIRD_MP3,"bird",.25,1.3);},
  gale(){sample(WIND_MP3,"wind",.25,.75);},
  subsidy(){for(let k=0;k<9;k++)tone(1800+Math.random()*1200,.45+k*.06,.08,"triangle",.05);tone(1319,1.05,.5,"sine",.08);tone(1760,1.12,.6,"sine",.06);},
@@ -1381,6 +1457,7 @@ if(c==="ticker")return `<div class="fx ticker"><span>긴급 속보 · ${esc(ev.n
   if(c==="leaves")return `<div class="fx leaves">${R(10,i=>`<i style="top:${(i*29)%85}%;--dl:${(i*.13).toFixed(2)}s"></i>`)}</div>`;
   if(c==="debris")return `<div class="fx debris">${R(14,i=>`<i style="left:${(i*53)%97}%;--dl:${(.4+i*.35).toFixed(2)}s"></i>`)}</div>`;
   if(c==="oil")return `<div class="fx oil">${R(12,i=>`<i style="left:${(i*41)%95}%;--dl:${(.5+(i*.17)%1.8).toFixed(2)}s"></i>`)}</div>`;
+  if(c==="co2up")return `<div class="fx co2up">${R(3,i=>`<i style="left:${25+i*22}%;--dl:${(.3+i*.3).toFixed(1)}s">CO₂</i>`)}<b>탄소 −3</b></div>`;
   if(c==="turbine")return `<div class="fx turbine">${TURB}</div>`;
   if(c==="bolt")return `<div class="fx bolt">${BOLT(22,.25,24)}${BOLT(55,.55,18)}${BOLT(8,.9,14)}</div>`;
   return `<div class="fx ${c}${c==="rain"&&L.includes("heavy")?" heavy":""}"></div>`;};
