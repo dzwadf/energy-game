@@ -343,11 +343,11 @@ button.xbtn::before{content:"✕ ";font-weight:900;color:#D32F2F}
 @keyframes sunpulse{from{filter:brightness(1)}to{filter:brightness(1.35)}}
 .fx.frost{animation:frostin 3.4s .25s ease-out both}
 @keyframes frostin2{from{box-shadow:inset 0 0 0 0 rgba(225,245,255,0)}to{box-shadow:inset 0 0 120px 50px rgba(225,245,255,.9)}}
-.fx.frost::after{content:"";position:absolute;inset:0;animation:frostin2 3.4s .25s ease-out both}
+.fx.frost::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 120px 50px rgba(225,245,255,.9);opacity:0;will-change:opacity;animation:fadein 3.4s .25s ease-out forwards}@keyframes fadein{to{opacity:1}}
 .fx.snow{background-image:radial-gradient(circle,#fff 0 2.5px,transparent 3.5px),radial-gradient(circle,rgba(255,255,255,.8) 0 1.5px,transparent 2.5px);background-size:80px 90px,50px 60px;animation:snowfall 2.2s linear infinite}
 @keyframes snowfall{from{background-position:0 0,20px 0}to{background-position:30px 180px,0 120px}}
 @keyframes frostin{from{opacity:0;transform:scale(1.25)}to{opacity:1;transform:none}}
-.fx.icecrack{background:linear-gradient(120deg,transparent 47%,rgba(235,250,255,.95) 47.3%,transparent 47.9%),linear-gradient(60deg,transparent 58%,rgba(235,250,255,.9) 58.3%,transparent 58.9%),linear-gradient(170deg,transparent 33%,rgba(235,250,255,.85) 33.3%,transparent 33.9%),linear-gradient(15deg,transparent 70%,rgba(235,250,255,.85) 70.3%,transparent 70.9%);filter:drop-shadow(0 0 6px #BFE8FF);clip-path:circle(0 at 50% 50%);animation:icegrow 4s .3s steps(9) forwards}
+.fx.icecrack{background:linear-gradient(120deg,transparent 47%,rgba(235,250,255,.95) 47.3%,transparent 47.9%),linear-gradient(60deg,transparent 58%,rgba(235,250,255,.9) 58.3%,transparent 58.9%),linear-gradient(170deg,transparent 33%,rgba(235,250,255,.85) 33.3%,transparent 33.9%),linear-gradient(15deg,transparent 70%,rgba(235,250,255,.85) 70.3%,transparent 70.9%);clip-path:circle(0 at 50% 50%);animation:icegrow 4s .3s steps(9) forwards}
 @keyframes icegrow{to{clip-path:circle(80% at 50% 50%)}}
 .fx.bolt svg{position:absolute;top:0;height:85vh;width:auto;opacity:0;filter:drop-shadow(0 0 10px #BFF6FF) drop-shadow(0 0 28px #59C8FF);animation:zap 3s var(--dl,.25s) steps(1) both}
 @keyframes zap{0%{opacity:1}5%{opacity:0}10%{opacity:1}13%{opacity:0}29%{opacity:1}32%{opacity:0}50%{opacity:1}54%{opacity:0}68%{opacity:1}70%{opacity:0}86%{opacity:1}90%,100%{opacity:0}}
@@ -386,8 +386,8 @@ button.xbtn::before{content:"✕ ";font-weight:900;color:#D32F2F}
 .cut.dry .bg{animation:kb 3.6s ease-out forwards,dry 6s .3s ease-in forwards}
 @keyframes dry{to{filter:sepia(.7) saturate(1.5) brightness(1.08) contrast(1.05)}}
 .fx.crack.soft{animation:crackin 6s .5s linear forwards;opacity:.75}
-.fx.flakes svg{position:absolute;filter:drop-shadow(0 0 8px #CFEFFF) drop-shadow(0 0 20px rgba(160,220,255,.8));animation:flakespin 6s var(--dl) linear both}
-.fx.flakes svg path{fill:none;stroke:#F2FBFF;stroke-width:3;stroke-linecap:round;stroke-dasharray:var(--len,90);stroke-dashoffset:var(--len,90);animation:draw 1.6s var(--dl) ease-out forwards}
+.fx.flakes svg{position:absolute;will-change:transform;animation:flakespin 6s var(--dl) linear both}
+.fx.flakes svg path{fill:none;stroke:#F2FBFF;stroke-width:4;stroke-linecap:round;stroke-dasharray:var(--len,90);stroke-dashoffset:var(--len,90);animation:draw 1.6s var(--dl) ease-out forwards}
 .fx.flakes svg .tw{stroke-width:2;animation-delay:calc(var(--dl) + .6s)}
 @keyframes flakespin{from{transform:scale(.6) rotate(0)}to{transform:scale(1) rotate(40deg)}}
 .fx.bigx svg{position:absolute;inset:8% 14%;width:72%;height:84%;filter:drop-shadow(0 0 16px rgba(255,40,40,.8))}
@@ -505,6 +505,51 @@ button.xbtn::before{content:"✕ ";font-weight:900;color:#D32F2F}
 @keyframes co2rise{0%{transform:translateY(0) scale(1);opacity:1}70%{opacity:1}100%{transform:translateY(-75vh) scale(.3);opacity:0}}
 .fx.co2up b{position:absolute;left:50%;top:14%;transform:translateX(-50%);font-size:3.2rem;font-weight:900;color:#7CD957;text-shadow:0 0 18px rgba(0,0,0,.6);animation:fxin .4s 1.6s both}
 @media (prefers-reduced-motion:reduce){.fx.co2up i{display:none}}
+
+/* ===== 성능: 비·눈은 transform으로 움직이기 ===== */
+.fx.snow,.fx.rain{background:none!important;animation:none!important;overflow:hidden}
+.fx.snow::before{content:"";position:absolute;left:0;right:0;top:-180px;bottom:0;background-image:radial-gradient(circle,#fff 0 2.5px,transparent 3.5px),radial-gradient(circle,rgba(255,255,255,.8) 0 1.5px,transparent 2.5px);background-size:80px 90px,50px 60px;will-change:transform;animation:mv180 3s linear infinite}
+@keyframes mv180{to{transform:translateY(180px)}}
+.fx.rain::before{content:"";position:absolute;left:0;right:0;top:-90px;bottom:0;background-image:radial-gradient(1.3px 11px at 50% 50%,rgba(215,230,255,.85) 40%,transparent),radial-gradient(1px 8px at 50% 50%,rgba(215,230,255,.7) 40%,transparent),radial-gradient(1.5px 13px at 50% 50%,rgba(225,235,255,.8) 40%,transparent);background-size:37px 90px,53px 90px,71px 90px;background-position:0 0,17px 31px,40px 62px;will-change:transform;animation:mv90 .5s linear infinite}
+.fx.rain.heavy::before{background-image:radial-gradient(1.3px 12px at 50% 50%,rgba(215,230,255,.9) 40%,transparent),radial-gradient(1px 9px at 50% 50%,rgba(215,230,255,.75) 40%,transparent),radial-gradient(1.5px 14px at 50% 50%,rgba(225,235,255,.85) 40%,transparent),radial-gradient(1.2px 10px at 50% 50%,rgba(215,230,255,.8) 40%,transparent);background-size:23px 90px,31px 90px,43px 90px,19px 90px;background-position:0 0,11px 31px,25px 62px,7px 45px;animation-duration:.32s}
+@keyframes mv90{to{transform:translateY(90px)}}
+@media (prefers-reduced-motion:reduce){.fx.snow::before,.fx.rain::before{animation:none}}
+
+/* ===== 원전 사고 ===== */
+.fx.boom::before{content:"";position:absolute;inset:0;background:#fff;opacity:0;animation:boomflash 1.2s .35s ease-out forwards}
+@keyframes boomflash{0%{opacity:0}6%{opacity:1}100%{opacity:0}}
+.fx.boom::after{content:"";position:absolute;left:50%;top:58%;width:60vmax;height:60vmax;margin:-30vmax 0 0 -30vmax;border-radius:50%;background:radial-gradient(circle,#FFF6C8 0 8%,#FFB23E 22%,rgba(230,90,20,.75) 42%,rgba(120,40,10,0) 66%);transform:scale(0);opacity:0;will-change:transform,opacity;animation:fireball 1.6s .38s cubic-bezier(.1,.8,.3,1) forwards}
+@keyframes fireball{0%{transform:scale(0);opacity:1}55%{opacity:.95}100%{transform:scale(1.15);opacity:0}}
+.fx.smoke i{position:absolute;bottom:20%;width:30vmin;height:30vmin;border-radius:50%;background:radial-gradient(circle,rgba(80,80,80,.85),rgba(60,60,60,0) 70%);opacity:0;will-change:transform,opacity;animation:plume 3.4s var(--dl) ease-out forwards}
+@keyframes plume{0%{transform:translate(0,0) scale(.3);opacity:0}15%{opacity:.9}100%{transform:translate(var(--dx),-55vh) scale(1.6);opacity:0}}
+.fx.radleak i{position:absolute;left:50%;top:55%;width:12px;height:12px;margin:-6px;border-radius:50%;background:#B6FF5C;box-shadow:0 0 10px #8CFF3A;opacity:0;will-change:transform,opacity;animation:radout 2.6s var(--dl) ease-out forwards}
+@keyframes radout{0%{transform:translate(0,0);opacity:0}10%{opacity:1}100%{transform:translate(var(--dx),var(--dy));opacity:0}}
+.fx.radleak b{position:absolute;left:4vw;top:9vh;width:min(24vw,160px);height:min(24vw,160px);border-radius:50%;background:#FFD400;display:grid;place-items:center;opacity:0;animation:fxin .4s 1.3s both,trefoil .5s 1.7s infinite alternate}
+.fx.radleak b svg{width:80%;height:80%}
+@keyframes trefoil{to{box-shadow:0 0 0 14px rgba(255,212,0,.35),0 0 60px rgba(180,255,90,.7)}}
+.fx.radleak span{position:absolute;left:50%;top:9vh;transform:translateX(-50%);font-size:1.1rem;background:#1a1a1a;color:#B6FF5C;font-weight:900;padding:4px 14px;border-radius:8px;border:2px solid #B6FF5C;white-space:nowrap;animation:fxin .3s 1.6s both}
+.cut.quake .bg{animation:kb 3.6s ease-out forwards,shake .3s .4s 5}
+/* ===== 기후 위기 한파: 화면 전체가 얼어붙기 ===== */
+.fx.iceover i{position:absolute;width:75vmax;height:75vmax;border-radius:50%;background:radial-gradient(circle,rgba(235,250,255,.92) 0 35%,rgba(185,225,255,.55) 58%,rgba(185,225,255,0) 72%);transform:scale(0);will-change:transform;animation:icegrow2 3s var(--dl) cubic-bezier(.2,.7,.3,1) forwards}
+.fx.iceover i:nth-child(1){left:-37vmax;top:-37vmax}.fx.iceover i:nth-child(2){right:-37vmax;top:-37vmax}.fx.iceover i:nth-child(3){left:-37vmax;bottom:-37vmax}.fx.iceover i:nth-child(4){right:-37vmax;bottom:-37vmax}
+@keyframes icegrow2{to{transform:scale(1)}}
+.fx.iceflash{background:#EAF8FF;opacity:0;animation:iceflash 3.6s .3s forwards}
+@keyframes iceflash{0%,30%{opacity:0}32%{opacity:.85}38%{opacity:0}62%{opacity:0}64%{opacity:.9}72%{opacity:0}100%{opacity:0}}
+.fx.shards i{position:absolute;width:16px;height:64px;filter:none;background:linear-gradient(#FFFFFF,#9FD8FF);clip-path:polygon(50% 0,100% 30%,60% 100%,0 70%);opacity:0;will-change:transform,opacity;animation:shard 1.1s var(--dl) ease-out forwards}
+@keyframes shard{0%{transform:translate(0,0) rotate(0) scale(.4);opacity:1}100%{transform:translate(var(--dx),var(--dy)) rotate(var(--rt)) scale(1);opacity:0}}
+.fx.bigtext{display:grid;place-items:center}
+.fx.bigtext b{font-size:clamp(2.6rem,12vw,6rem);font-weight:900;color:#EAF8FF;text-shadow:0 0 20px #7FD0FF,0 4px 0 #2F6FB0;letter-spacing:.08em;transform:translateY(-22vh) scale(2);opacity:0;animation:frz .5s 2.35s cubic-bezier(.3,1.6,.5,1) forwards}
+@keyframes frz{to{transform:translateY(-22vh) scale(1);opacity:1}}
+.cut.freeze2 .bg{animation:kb 3.6s ease-out forwards,shake .25s 1.45s 2,shake .3s 2.6s 2,frzbg 3s .3s forwards}
+@keyframes frzbg{to{filter:saturate(.35) brightness(1.15) hue-rotate(-15deg)}}
+@media (prefers-reduced-motion:reduce){.fx.boom::after,.fx.smoke i,.fx.radleak i,.fx.shards i{display:none}.fx.iceover i{animation:none;transform:scale(.8)}}
+
+.fx.scrack svg{width:100%;height:100%}
+.fx.scrack path{fill:none;stroke:rgba(245,252,255,.95);stroke-linecap:round;stroke-dasharray:160;stroke-dashoffset:160}
+.fx.scrack .c1{stroke-width:.55;animation:draw .35s 2.6s ease-out forwards}
+.fx.scrack .c2{stroke-width:.35;stroke:rgba(220,240,255,.8);animation:draw .45s 2.75s ease-out forwards}
+.fx.scrack::after{content:"";position:absolute;left:60%;top:40%;width:16vmin;height:16vmin;margin:-8vmin;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.95),rgba(200,235,255,0) 70%);opacity:0;animation:boomflash .8s 2.58s ease-out forwards}
+@media (prefers-reduced-motion:reduce){.fx.scrack path{stroke-dashoffset:0;animation:none}}
 
 .tabs{display:flex;gap:6px;margin:0 0 12px}
 .tabs button{flex:1}
@@ -755,7 +800,8 @@ const EV_DATA=[
  [2,"longdrought","bad","장기 가뭄",1,"수력 전력 0, 원자력·SMR 전력 −2 (냉각수 부족)"],
  [2,"xheat","dem","극한 폭염",1,"모두 소비 +4"],
  [2,"cold","dem","한파",1,"모두 소비 +3 (난방)"],
- [2,"gridfail","ban","송전망 고장",2,"스마트그리드가 없으면 전력 −3, 이번 라운드에 AI 데이터센터·공장을 살 수 없다"],
+ [2,"nukeleak","ban","원전 사고 · 방사능 누출",1,"원자력·SMR 전력 0, 원자력·SMR을 살 수 없다. 원자력·SMR을 가진 사람은 1장당 토큰 1개를 반납한다 (최대 2개, 제염 비용)"],
+ [2,"gridfail","ban","송전망 고장",1,"스마트그리드가 없으면 전력 −3, 이번 라운드에 AI 데이터센터·공장을 살 수 없다"],
  [2,"strait","geo","해협 봉쇄",1,"석탄화력·LNG화력 전력 0. 화석 토큰 1개를 내면 그 카드 1장은 정상 가동"],
  [2,"ctax2","ban","탄소세 강화",1,"석탄화력 1장마다 토큰 2개, LNG화력 1장마다 토큰 1개 반납, 이번 라운드에 석탄화력을 살 수 없다"],
  [2,"oil","geo","유가 급등",1,"이번 라운드에 아무도 화석 토큰을 가져올 수 없다"],
@@ -819,7 +865,7 @@ const buildCount=p=>p.cards.filter(c=>c.kind==="bd").length;
 const chipCap=p=>p.ess?5:0;
 const ESS_CARD={name:"ESS",kind:"ess",tier:3,cost:{money:2,people:1,land:2},power:0,pts:0,bonus:null};
 function banned(S,card){const ev=S.ev?S.ev.id:"";if(S.phase!=="turn")return "";
- if(ev==="nukecheck"&&card.kind==="nu")return "원전 정기 점검";if(ev==="safety"&&card.kind==="fo")return "설비 안전 점검";
+ if(ev==="nukecheck"&&card.kind==="nu")return "원전 정기 점검";if(ev==="nukeleak"&&card.kind==="nu")return "원전 사고";if(ev==="safety"&&card.kind==="fo")return "설비 안전 점검";
  if(ev==="gridfail"&&["AI 데이터센터","공장"].includes(card.name))return "송전망 고장";if(ev==="ctax2"&&card.name==="석탄화력")return "탄소세 강화";return "";}
 const evDeckNow=S=>S.evDecks[1].length?S.evDecks[1]:S.evDecks[2];
 
@@ -844,6 +890,7 @@ function revealEvent(S,ev){
  if(ev.id==="tech")S.flags.t3Disc=1;
  if(ev.id==="oil")S.flags.noFossil=1;
  if(ev.id==="uranium")S.flags.noUranium=1;
+ if(ev.id==="nukeleak"){for(const q of S.players){const k=Math.min(2,q.cards.filter(c=>c.kind==="nu").length);let got=0;for(let t=0;t<k;t++){const rr=RES.slice().sort((a,b)=>q.tokens[b]-q.tokens[a])[0];if(q.tokens[rr]>0){q.tokens[rr]--;S.supply[rr]++;got++;}}if(got)log(S,`${q.name}: 방사능 제염 비용으로 토큰 ${got}개 반납`);}}
  if(ev.id==="ccs"){const b=S.carbon||0;S.carbon=Math.max(0,b-3);log(S,`탄소 포집: 탄소 게이지 ${b} → ${S.carbon}`);}
  if(ev.id==="coop")S.pending={type:"coop",queue:S.players.map((_,i)=>i)};}
 
@@ -877,7 +924,7 @@ function canBuyEss(S,p){return essState(S,p)==="open"&&!S.acted&&S.phase==="turn
 function buyEss(S){const p=S.players[S.cur];if(!canBuyEss(S,p))return false;const c=costFor(S,p,ESS_CARD);for(const r of RES){p.tokens[r]-=c.need[r];S.supply[r]+=c.need[r];}
  p.ess=true;S.special.ess--;S.acted=true;log(S,`${p.name}: 「ESS」 구매`);log(S,`${p.name}: ESS 설치! (전기를 5개까지 저장, +1점)`);endTurn(S);return true;}
 function chooseActivist(S,r){const pd=S.pending;const i=pd.queue.shift();const q=S.players[i];
- if(r&&S.supply[r]>0){S.supply[r]--;q.tokens[r]++;log(S,`${q.name}(환경운동가): ${S.players[pd.buyer].name}님이 「${pd.card}」를 사서 ${RL[r]} 1개를 받아요`);}
+ if(r&&S.supply[r]>0){S.supply[r]--;q.tokens[r]++;log(S,`${q.name}(환경운동가): ${S.players[pd.buyer].name}이(가) 「${pd.card}」를 사서 ${RL[r]} 1개를 받아요`);}
  if(!pd.queue.length){S.pending=null;endTurn(S);}}
 
 // ----- 토큰 -----
@@ -912,7 +959,7 @@ function powerCalc(S,p,run=0){const ev=S.ev?S.ev.id:"";let gen=0,wl=0;const fo=f
   if(SOLAR.includes(c.name)){if(ev==="sunny")v+=1;if(["cloudy","monsoon","typhoon"].includes(ev)){w=v;v=0;}}
   if(WIND.includes(c.name)){if(ev==="gale")v+=1;if(["nowind","typhoon","heatwind"].includes(ev)){w=v;v=0;}}
   if(c.name==="수력"){if(ev==="monsoon")v+=1;if(["drought","longdrought"].includes(ev)){w=v;v=0;}}
-  if(c.kind==="nu"){if(ev==="nukecheck")v=0;if(ev==="drought"){w=Math.min(1,v);v-=w;}if(ev==="longdrought"){w=Math.min(2,v);v-=w;}if(ev==="uranium")v=Math.max(0,v-2);}
+  if(c.kind==="nu"){if(ev==="nukecheck"||ev==="nukeleak")v=0;if(ev==="drought"){w=Math.min(1,v);v-=w;}if(ev==="longdrought"){w=Math.min(2,v);v-=w;}if(ev==="uranium")v=Math.max(0,v-2);}
   if(c.kind==="fo"&&ev==="strait")v=0;
   gen+=v;wl+=w;}
  if(ev==="strait")gen+=fo.slice(0,run).reduce((a,c)=>a+c.power,0);
@@ -1291,7 +1338,7 @@ const EVIMG={"good": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAY
  const conv=(obj,pre)=>{for(const k of Object.keys(obj)){const v=obj[k];if(typeof v!=="string"||v.slice(0,5)!=="data:")continue;try{const c=v.indexOf(",");const mime=v.slice(5,v.indexOf(";"));const bin=atob(v.slice(c+1));const u=new Uint8Array(bin.length);for(let n=0;n<bin.length;n++)u[n]=bin.charCodeAt(n);orig[pre+k]=[obj,k,v];obj[k]=URL.createObjectURL(new Blob([u],{type:mime}));}catch(e){}}};
  conv(IMG,"i:");conv(EVIMG,"e:");const first=Object.values(orig)[0];if(!first)return;
  const t=new Image();t.onerror=()=>{for(const [o,k,v] of Object.values(orig))o[k]=v;try{if(typeof render==="function")render();}catch(e){}};t.src=first[0][first[1]];})();
-const EVFX={save:["@가정","glow spark lightsoff","chime"],ccs:["good","rays glow co2up","chime"],dr:["@스마트그리드","glow spark","chime"],sunny:["good","rays glow birds","chime"],safety:["industry","beacon stamp","alarm"],heatwind:["heat","heat sun turbine|wobble","heat"],gale:["@풍력","wind leaves|sway","whoosh"],subsidy:["plant","glow coins spark","chime"],save:["plant","spark","chime"],
+const EVFX={nukeleak:["nuke","boom smoke radleak beacon y|quake","geiger"],save:["@가정","glow spark lightsoff","chime"],ccs:["good","rays glow co2up","chime"],dr:["@스마트그리드","glow spark","chime"],sunny:["good","rays glow birds","chime"],safety:["industry","beacon stamp","alarm"],heatwind:["heat","heat sun turbine|wobble","heat"],gale:["@풍력","wind leaves|sway","whoosh"],subsidy:["plant","glow coins spark","chime"],save:["plant","spark","chime"],
  cloudy:["bad","clouds dark","rain"],nowind:["@풍력","dark turbine","still"],monsoon:["bad","dark rain","rain"],drought:["crisis","heat sun gauge crack soft|dry","heat"],
  heat:["heat","heat sun|wobble","heat"],ctax:["industry","ticker stamp|thud","alarm"],nukecheck:["nuke","nuke stamp","geiger"],calm:["good","","calm"],
  tech:["@기술 개발자","glow spark","chime"],typhoon:["typhoon","dark rain heavy wind flash|storm","thunder"],longdrought:["crisis","heat sun gauge crack soft|dry wobble","heat"],
@@ -1407,6 +1454,7 @@ function crack(t0,vol){nz(t0,.4,vol,1100,"bandpass",.004,160,1.2);pad(58,t0,.5,v
 function iceSing(t0,vol){const f=2500+Math.random()*2500;pad(f,t0,.4,vol,"sine",.004,f/9);pad(f*1.5,t0+.02,.3,vol*.3,"sine",.004,f/6);}
 function printer(t0,dur,vol){for(let t=0;t<dur;t+=.045)nz(t0+t,.03,vol,2200,"bandpass",.002,null,3);pad(120,t0,dur,vol*.25,"square",.05);}
 const EVSND={
+ nukeleak(){nz(.35,1.6,.6,140,"lowpass",.005,40);pad(48,.35,1.4,.35,"sine",.005,28);nz(.35,.5,.35,1800,"bandpass",.002,300,1);for(let k=0;k<70;k++)nz(1.1+Math.random()*2.6,.006,.25,4200,"highpass",.0008);sample(SIREN_MP3,"siren",1.3,.45);},
  save(){[0,.35,.7].forEach((t,i)=>{nz(.3+t,.04,.3,2500,"bandpass",.002,null,3);pad(220-i*30,.3+t,.25,.05,"sine",.005);});[523,659,784].forEach((f,i)=>pad(f,1.4+i*.12,1.2,.06,"triangle",.02));},
  ccs(){nz(.3,1.6,.18,2000,"bandpass",.3,300,2);pad(400,.3,1.6,.05,"sine",.3,150);[659,784,1047].forEach((f,i)=>pad(f,1.9+i*.1,1.1,.06,"triangle",.02));},
  dr(){[392,494,587,784].forEach((f,i)=>pad(f,.3+i*.15,1.4,.05,"triangle",.02));nz(.3,1.8,.04,6000,"highpass",.6);},
@@ -1456,10 +1504,16 @@ if(c==="ticker")return `<div class="fx ticker"><span>긴급 속보 · ${esc(ev.n
   if(c==="leaves")return `<div class="fx leaves">${R(10,i=>`<i style="top:${(i*29)%85}%;--dl:${(i*.13).toFixed(2)}s"></i>`)}</div>`;
   if(c==="debris")return `<div class="fx debris">${R(14,i=>`<i style="left:${(i*53)%97}%;--dl:${(.4+i*.35).toFixed(2)}s"></i>`)}</div>`;
   if(c==="oil")return `<div class="fx oil">${R(12,i=>`<i style="left:${(i*41)%95}%;--dl:${(.5+(i*.17)%1.8).toFixed(2)}s"></i>`)}</div>`;
+  if(c==="smoke")return `<div class="fx smoke">${R(6,i=>`<i style="left:${38+(i%3)*8}%;--dl:${(.6+i*.25).toFixed(2)}s;--dx:${((i%3)-1)*8}vw"></i>`)}</div>`;
+  if(c==="radleak")return `<div class="fx radleak">${R(24,i=>{const a=i/24*Math.PI*2,d=30+(i%4)*9;return `<i style="--dl:${(.9+(i%6)*.12).toFixed(2)}s;--dx:${(Math.cos(a)*d).toFixed(1)}vw;--dy:${(Math.sin(a)*d*.8).toFixed(1)}vh"></i>`;})}<b><svg viewBox="-50 -50 100 100"><circle r="8" fill="#1a1a1a"/>${[0,120,240].map(r=>`<path transform="rotate(${r})" d="M0 -14 A14 14 0 0 1 12.1 -7 L35 -20.2 A40 40 0 0 0 0 -40Z" fill="#1a1a1a"/>`).join("")}</svg></b><span>☢ 방사능 누출 · 대피하세요</span></div>`;
+  if(c==="shards")return `<div class="fx shards">${R(28,i=>{const a=i/28*Math.PI*2,d=35+(i%5)*10;return `<i style="left:${50+(i%3-1)*14}%;top:${42+(i%2)*14}%;--dl:${(i<14?1.45:2.6)+(i%7)*.03}s;--dx:${(Math.cos(a)*d).toFixed(1)}vw;--dy:${(Math.sin(a)*d).toFixed(1)}vh;--rt:${(i*67)%360}deg"></i>`;})}</div>`;
+  if(c==="iceover")return `<div class="fx iceover">${R(4,i=>`<i style="--dl:${(.3+i*.25).toFixed(2)}s"></i>`)}</div>`;
+  if(c==="bigtext")return `<div class="fx scrack"><svg viewBox="0 0 160 100" preserveAspectRatio="xMidYMid slice"><path class="c1" d="M96 40 L109.5 40.0 L122.4 36.1 L136.5 38.9 L149.8 36.2 L162.0 30.1"/><path class="c1" d="M96 40 L106.6 44.5 L118.6 47.0 L129.8 50.7 L138.3 58.0 L143.7 67.6"/><path class="c1" d="M96 40 L102.8 48.8 L106.6 58.5 L117.0 66.0 L127.1 73.4 L121.7 86.4"/><path class="c1" d="M96 40 L97.4 54.4 L101.0 68.6 L104.1 82.9 L101.1 97.5 L83.6 111.5"/><path class="c1" d="M96 40 L85.0 49.8 L76.7 61.0 L64.3 70.1 L64.3 84.7 L56.5 95.9"/><path class="c1" d="M96 40 L78.7 45.1 L62.0 51.2 L42.9 53.3 L26.5 60.0 L11.2 68.4"/><path class="c1" d="M96 40 L77.8 36.3 L61.0 29.6 L43.2 25.1 L29.7 14.1 L10.8 10.7"/><path class="c1" d="M96 40 L78.7 30.7 L64.5 18.9 L54.6 4.5 L27.5 2.2 L19.2 -14.2"/><path class="c1" d="M96 40 L92.5 27.1 L86.6 14.7 L87.9 1.2 L70.5 -9.2 L76.5 -23.9"/><path class="c1" d="M96 40 L103.6 28.7 L115.5 19.1 L126.9 9.5 L126.8 -4.9 L139.9 -14.2"/><path class="c1" d="M96 40 L111.1 31.9 L128.9 26.6 L143.5 17.9 L150.0 2.5 L165.9 -5.1"/><path class="c2" d="M105.5 40.0 L102.7 42.7 L100.4 45.4 L96.0 45.7 L92.0 44.8 L89.2 42.7 L86.3 40.0 L89.1 37.2 L91.8 35.0 L96.0 33.9 L101.0 33.9 L102.8 37.2 L104.9 40.0"/><path class="c2" d="M116.3 40.0 L115.3 47.8 L107.0 53.3 L96.0 55.5 L86.7 51.3 L79.1 46.8 L76.8 40.0 L76.7 32.2 L84.6 26.2 L96.0 27.5 L105.0 29.1 L111.9 33.6 L114.4 40.0"/><path class="c2" d="M129.8 40.0 L126.2 52.2 L111.8 59.1 L96.0 60.3 L79.4 60.1 L67.7 51.4 L61.3 40.0 L62.6 26.5 L78.0 18.2 L96.0 16.1 L113.6 18.7 L127.0 27.5 L125.5 40.0"/></svg></div>`;
   if(c==="co2up")return `<div class="fx co2up">${R(3,i=>`<i style="left:${25+i*22}%;--dl:${(.3+i*.3).toFixed(1)}s">CO₂</i>`)}<b>탄소 −3</b></div>`;
   if(c==="turbine")return `<div class="fx turbine">${TURB}</div>`;
   if(c==="bolt")return `<div class="fx bolt">${BOLT(22,.25,24)}${BOLT(55,.55,18)}${BOLT(8,.9,14)}</div>`;
   return `<div class="fx ${c}${c==="rain"&&L.includes("heavy")?" heavy":""}"></div>`;};
+ if(ev.id==="cold"&&ev.half===2){L.length=0;L.push("frost","snow","flakes","iceover","iceflash","shards");el.classList.add("freeze2");}
  const fx=L.map(sp).join("");
  const SD={ctax:".3s",ctax2:".3s",gridfail:"3.5s",safety:".4s",nukecheck:".4s"};if(SD[ev.id])el.style.setProperty("--sd",SD[ev.id]);
  if(ev.id==="uranium")el.style.setProperty("--td","1.1s");
